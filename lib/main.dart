@@ -15,14 +15,33 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width; //화면크기
+    double screenSize = size * 0.8; //화면크기의 0.8배
+    return Scaffold(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(child: ABComponent()),
+          Expanded(child: CComponent()),
+        ],
+      ),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage> {
+class ABComponent extends StatefulWidget {
+  const ABComponent({Key? key}) : super(key: key);
+
+  @override
+  State<ABComponent> createState() => _ABComponentState();
+}
+
+class _ABComponentState extends State<ABComponent> {
   int num = 1;
 
   void increase() {
@@ -33,8 +52,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).size.width; //화면크기
-    double screenSize = size * 0.8; //화면크기의 0.8배
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,6 +116,22 @@ class BComponent extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CComponent extends StatelessWidget {
+  const CComponent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Expanded(
+        child: Align(
+          child: Text("빈땅",
+              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+        ),
       ),
     );
   }
